@@ -1,0 +1,44 @@
+package pranav.examples;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Employees {
+    public static void main(String[] args) {
+        // JDBC URL, username, and password of MySQL server
+        String url = "jdbc:mysql://localhost:3306/class2"; // Replace 'employees' with your DB name
+        String username = "ADMIN"; // Replace with your MySQL username
+        String password = "YOUR_PASSWORD"; // Replace with your MySQL password
+
+        // Connection and Statement objects
+        Connection connection = null;
+
+        try {
+            // Establish the connection
+            connection = DriverManager.getConnection(url, username, password);
+            System.out.println("Connected to the database!");
+            System.out.println(connection);
+
+            // Create a Statement object to execute SQL queries
+            Statement statement = connection.createStatement();
+
+
+
+            statement.close();
+
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("Error connecting to the database: " + e.getMessage());
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
+
+        }
+    }
